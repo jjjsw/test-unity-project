@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class aim : MonoBehaviour
+public class Aim : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Transform targetCamera;
+    private Quaternion initialLocalRotation;
+
     void Start()
     {
-        //hihihiiii
+        if (targetCamera == null)
+            targetCamera = Camera.main.transform;
+
+        // store manual rotation set in editor
+        initialLocalRotation = transform.localRotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // apply camera rotation * initial offset
+        transform.rotation = targetCamera.rotation * initialLocalRotation;
     }
 }
